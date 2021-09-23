@@ -11,7 +11,11 @@ export type GridBodyProps = {
   columnWidth: number;
   todayColor: string;
   rtl: boolean;
+  hasCrosswalk: boolean;
+  hasDateLine: boolean;
+  renderRowLines: (index: number) => boolean;
 };
+
 export const GridBody: React.FC<GridBodyProps> = ({
   tasks,
   dates,
@@ -20,6 +24,9 @@ export const GridBody: React.FC<GridBodyProps> = ({
   columnWidth,
   todayColor,
   rtl,
+  hasCrosswalk,
+  hasDateLine,
+  renderRowLines,
 }) => {
   let y = 0;
   const gridRows: ReactChild[] = [];
@@ -33,27 +40,33 @@ export const GridBody: React.FC<GridBodyProps> = ({
       className={styles.gridRowLine}
     />,
   ];
-  for (const task of tasks) {
-    gridRows.push(
-      <rect
-        key={"Row" + task.id}
-        x="0"
-        y={y}
-        width={svgWidth}
-        height={rowHeight}
-        className={styles.gridRow}
-      />
-    );
-    rowLines.push(
-      <line
-        key={"RowLine" + task.id}
-        x="0"
-        y1={y + rowHeight}
-        x2={svgWidth}
-        y2={y + rowHeight}
-        className={styles.gridRowLine}
-      />
-    );
+  for (let i = 0; i < tasks.length; i++) {
+    const task = tasks[i];
+    if (hasCrosswalk) {
+      gridRows.push(
+        <rect
+          key={"Row" + task.id}
+          x="0"
+          y={y}
+          width={svgWidth}
+          height={rowHeight}
+          className={styles.gridRow}
+        />
+      );
+    }
+    const isRenderRowLines = renderRowLines(i);
+    if (isRenderRowLines) {
+      rowLines.push(
+        <line
+          key={"RowLine" + task.id}
+          x="0"
+          y1={y + rowHeight}
+          x2={svgWidth}
+          y2={y + rowHeight}
+          className={styles.gridRowLine}
+        />
+      );
+    }
     y += rowHeight;
   }
 
@@ -63,16 +76,18 @@ export const GridBody: React.FC<GridBodyProps> = ({
   let today: ReactChild = <rect />;
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
-    ticks.push(
-      <line
-        key={date.getTime()}
-        x1={tickX}
-        y1={0}
-        x2={tickX}
-        y2={y}
-        className={styles.gridTick}
-      />
-    );
+    if (hasDateLine) {
+      ticks.push(
+        <line
+          key={date.getTime()}
+          x1={tickX}
+          y1={0}
+          x2={tickX}
+          y2={y}
+          className={styles.gridTick}
+        />
+      );
+    }
     if (
       (i + 1 !== dates.length &&
         date.getTime() < now.getTime() &&

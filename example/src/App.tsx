@@ -80,6 +80,14 @@ const App = () => {
         onExpanderClick={handleExpanderClick}
         listCellWidth={isChecked ? "155px" : ""}
         columnWidth={columnWidth}
+        locale="zh"
+        barCornerRadius={10}
+        listColumns={[
+          {
+            title: "name",
+            dataIndex: "name"
+          },
+        ]}
       />
       <h3>Gantt With Limited Height</h3>
       <Gantt

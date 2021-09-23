@@ -1,8 +1,7 @@
 .ganttTable {
   display: table;
-  border-bottom: #e6e4e4 1px solid;
-  border-top: #e6e4e4 1px solid;
-  border-left: #e6e4e4 1px solid;
+  padding: 1px 0;
+  background: #f2f8ff;
 }
 
 .ganttTable_Header {
@@ -20,4 +19,6 @@
   display: table-cell;
   vertical-align: -webkit-baseline-middle;
   vertical-align: middle;
+  padding-left: 12px;
+  color: #626369;
 }

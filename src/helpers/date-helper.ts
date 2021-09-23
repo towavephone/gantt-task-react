@@ -147,7 +147,18 @@ export const seedDates = (
 
 export const getLocaleMonth = (date: Date, locale: string) => {
   let bottomValue = getCachedDateTimeFormat(locale, {
-    month: "long",
+    month: "2-digit",
+  }).format(date);
+  bottomValue = bottomValue.replace(
+    bottomValue[0],
+    bottomValue[0].toLocaleUpperCase()
+  );
+  return bottomValue;
+};
+
+export const getLocaleYear = (date: Date, locale: string) => {
+  let bottomValue = getCachedDateTimeFormat(locale, {
+    year: "numeric",
   }).format(date);
   bottomValue = bottomValue.replace(
     bottomValue[0],

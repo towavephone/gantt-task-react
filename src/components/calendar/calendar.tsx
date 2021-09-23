@@ -4,6 +4,7 @@ import { TopPartOfCalendar } from "./top-part-of-calendar";
 import {
   getDaysInMonth,
   getLocaleMonth,
+  getLocaleYear,
   getWeekNumberISO8601,
 } from "../../helpers/date-helper";
 import { DateSetup } from "../../types/date-setup";
@@ -146,7 +147,7 @@ export const Calendar: React.FC<CalendarProps> = ({
         i + 1 !== dates.length &&
         date.getMonth() !== dates[i + 1].getMonth()
       ) {
-        const topValue = getLocaleMonth(date, locale);
+        const topValue = getLocaleYear(date, locale) + getLocaleMonth(date, locale);
 
         topValues.push(
           <TopPartOfCalendar

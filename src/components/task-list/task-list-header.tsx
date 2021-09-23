@@ -1,4 +1,5 @@
 import React from "react";
+import { ListColumn } from "../../types/public-types";
 import styles from "./task-list-header.module.css";
 
 export const TaskListHeaderDefault: React.FC<{
@@ -6,13 +7,15 @@ export const TaskListHeaderDefault: React.FC<{
   rowWidth: string;
   fontFamily: string;
   fontSize: string;
-}> = ({ headerHeight, fontFamily, fontSize, rowWidth }) => {
+  listColumns: ListColumn[];
+}> = ({ headerHeight, fontFamily, fontSize, listColumns, rowWidth }) => {
   return (
     <div
       className={styles.ganttTable}
       style={{
         fontFamily: fontFamily,
         fontSize: fontSize,
+        width: rowWidth,
       }}
     >
       <div
@@ -21,44 +24,17 @@ export const TaskListHeaderDefault: React.FC<{
           height: headerHeight - 2,
         }}
       >
-        <div
-          className={styles.ganttTable_HeaderItem}
-          style={{
-            minWidth: rowWidth,
-          }}
-        >
-          &nbsp;Name
-        </div>
-        <div
-          className={styles.ganttTable_HeaderSeparator}
-          style={{
-            height: headerHeight * 0.5,
-            marginTop: headerHeight * 0.2,
-          }}
-        />
-        <div
-          className={styles.ganttTable_HeaderItem}
-          style={{
-            minWidth: rowWidth,
-          }}
-        >
-          &nbsp;From
-        </div>
-        <div
-          className={styles.ganttTable_HeaderSeparator}
-          style={{
-            height: headerHeight * 0.5,
-            marginTop: headerHeight * 0.25,
-          }}
-        />
-        <div
-          className={styles.ganttTable_HeaderItem}
-          style={{
-            minWidth: rowWidth,
-          }}
-        >
-          &nbsp;To
-        </div>
+        {listColumns.map(item => (
+          <div
+            key={item.key || item.dataIndex}
+            className={styles.ganttTable_HeaderItem}
+            style={{
+              width: item.width || "auto",
+            }}
+          >
+            {item.title}
+          </div>
+        ))}
       </div>
     </div>
   );

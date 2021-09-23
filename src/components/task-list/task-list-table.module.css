@@ -1,11 +1,10 @@
 .taskListWrapper {
-  display: table;
   border-bottom: #e6e4e4 1px solid;
-  border-left: #e6e4e4 1px solid;
+  border-spacing: 0;
+  table-layout: fixed;
 }
 
 .taskListTableRow {
-  display: table-row;
   text-overflow: ellipsis;
 }
 
@@ -14,12 +13,13 @@
 }
 
 .taskListCell {
-  display: table-cell;
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  border-bottom: #e6e4e4 1px solid;
 }
+
 .taskListNameWrapper {
   display: flex;
 }
@@ -31,8 +31,16 @@
   user-select: none;
   cursor: pointer;
 }
+
 .taskListEmptyExpander {
   font-size: 0.6rem;
   padding-left: 1rem;
   user-select: none;
+}
+
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  word-break: keep-all;
 }

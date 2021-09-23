@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
+import classnames from "classnames";
+
 import { BarTask } from "../../types/bar-task";
 import { GanttContentMoveAction } from "../../types/gantt-task-actions";
 import { Bar } from "./bar/bar";
@@ -21,6 +23,7 @@ export type TaskItemProps = {
     selectedTask: BarTask,
     event?: React.MouseEvent | React.KeyboardEvent
   ) => any;
+  barClassName: string;
 };
 
 export const TaskItem: React.FC<TaskItemProps> = props => {
@@ -32,6 +35,7 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
     isSelected,
     rtl,
     onEventStart,
+    barClassName,
   } = {
     ...props,
   };
@@ -108,11 +112,12 @@ export const TaskItem: React.FC<TaskItemProps> = props => {
       <text
         x={getX()}
         y={task.y + taskHeight * 0.5}
-        className={
+        className={classnames(
           isTextInside
             ? style.barLabel
-            : style.barLabel && style.barLabelOutside
-        }
+            : style.barLabel && style.barLabelOutside,
+          barClassName
+        )}
         ref={textRef}
       >
         {task.name}
