@@ -8,15 +8,15 @@
 
 ## Install
 
-```
-npm install gantt-task-react
+```bash
+npm install @towavephone/gantt-task-react
 ```
 
 ## How to use it
 
 ```javascript
-import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from 'gantt-task-react';
-import "gantt-task-react/dist/index.css";
+import { Gantt, Task, EventOption, StylingOption, ViewMode, DisplayOption } from '@towavephone/gantt-task-react';
+import "@towavephone/gantt-task-react/dist/index.css";
 
 let tasks: Task[] = [
     {
@@ -49,10 +49,11 @@ You may handle actions
 
 ## How to run example
 
-```
-cd ./example
-npm install
-npm start
+打开 2 个终端，实现实时更改代码查看 example 的功能
+
+```bash
+npm start # 实时编译 src 代码到 dist 目录
+npm run dev:example # example 使用实时编译的代码
 ```
 
 ## Gantt Configuration
