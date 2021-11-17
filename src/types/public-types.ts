@@ -11,14 +11,14 @@ export enum ViewMode {
 export type TaskType = "task" | "milestone" | "project";
 export interface Task {
   id: string;
-  type: TaskType;
+  type?: TaskType;
   name: string;
   start: Date;
   end: Date;
   /**
    * From 0 to 100
    */
-  progress: number;
+  progress?: number;
   styles?: {
     backgroundColor?: string;
     backgroundSelectedColor?: string;
@@ -69,8 +69,8 @@ export interface EventOption {
   onExpanderClick?: (task: Task) => void;
 }
 
-export type ListColumn = {
-  dataIndex: string;
+export interface ListColumn {
+  dataIndex?: string;
   key?: string;
   render?: (text: string, record: Task, index: number) => any;
   title: ReactNode;
@@ -79,7 +79,7 @@ export type ListColumn = {
   rowSpan?: number;
   width?: string;
   ellipsis?: boolean | { showTitle: boolean };
-};
+}
 
 export interface DisplayOption {
   viewMode?: ViewMode;
